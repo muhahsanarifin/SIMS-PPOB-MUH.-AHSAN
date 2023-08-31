@@ -1,0 +1,46 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Components
+src/components/Input.tsx
+
+# Types
+src/utils/types/form.ts
+src/utils/types/api.ts
+
+# Environment
+.env
+
+# Assets
+/src/assets
+
+# Helper
+src/helpers/scroll.tsx
+
+# Postcss
+postcss.config.js
+
+# README
+README.md
