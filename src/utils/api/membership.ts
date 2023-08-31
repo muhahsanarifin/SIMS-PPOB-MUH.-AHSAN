@@ -23,7 +23,7 @@ const anotherConfig = (accessToken: string) => {
 export const registration = (body: object) =>
   Axios.post(BASE_URL + "/registration", body);
 
-export const login = (body: object) => Axios.post(BASE_URL + "/login", body);
+export const login = (body: any) => Axios.post(BASE_URL + "/login", body);
 
 export const getProfile = (accessToken: string) =>
   Axios.get(BASE_URL + "/profile", config(accessToken));

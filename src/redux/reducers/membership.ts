@@ -57,14 +57,14 @@ const registrationThunk = createAsyncThunk(
       typeof cbPending === "function" && cbPending();
       const response = await membership.registration(body);
       console.log("Data regisration:", response);
-      typeof cbFulfilled === "function" && cbFulfilled(response.data);
+      typeof cbFulfilled === "function" && cbFulfilled(response);
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data?.msg);
-        throw error.response.data?.msg;
+        // console.error(error.response.data);
+        throw error.response.data;
       } else {
-        console.error(error);
+        // console.error(error);
         throw error;
       }
     } finally {
@@ -79,15 +79,15 @@ const loginThunk = createAsyncThunk(
     try {
       typeof cbPending === "function" && cbPending();
       const response = await membership.login(body);
-      console.log("Data login:", response);
+      // console.log("Data login:", response);
       typeof cbFulfilled === "function" && cbFulfilled(response.data);
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data?.msg);
-        throw error.response.data?.msg;
+        // console.error(error.response.data);
+        throw error.response.data;
       } else {
-        console.error(error);
+        // console.error(error);
         throw error;
       }
     } finally {
@@ -98,17 +98,22 @@ const loginThunk = createAsyncThunk(
 
 const getProfileThunk = createAsyncThunk(
   "profile",
-  async ({ cbPending, cbFulfilled, cbFinally, body }: ArgGetProfileThunk) => {
+  async ({
+    cbPending,
+    cbFulfilled,
+    cbFinally,
+    accessToken,
+  }: ArgGetProfileThunk) => {
     try {
       typeof cbPending === "function" && cbPending();
-      const response = await membership.getProfile(body);
+      const response = await membership.getProfile(accessToken);
       console.log("Data get profile:", response);
       typeof cbFulfilled === "function" && cbFulfilled(response.data);
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data?.msg);
-        throw error.response.data?.msg;
+        console.error(error.response.data);
+        throw error.response.data;
       } else {
         console.error(error);
         throw error;
@@ -133,11 +138,11 @@ const updateProfieThunk = createAsyncThunk(
       const response = await membership.updateProfile(accessToken, body);
       console.log("Data update profile:", response);
       typeof cbFulfilled === "function" && cbFulfilled(response.data);
-      return response.data?.data[0];
+      return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data?.msg);
-        throw error.response.data?.msg;
+        console.error(error.response.data);
+        throw error.response.data;
       } else {
         console.error(error);
         throw error;
@@ -165,8 +170,8 @@ const updateProfileImageThunk = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data?.msg);
-        throw error.response.data?.msg;
+        console.error(error.response.data);
+        throw error.response.data;
       } else {
         console.error(error);
         throw error;
@@ -180,7 +185,32 @@ const updateProfileImageThunk = createAsyncThunk(
 const membershipSlice = createSlice({
   name: "membership",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (prevState) => {
+      return {
+        ...prevState,
+        login: {
+          isLoading: false,
+          isFulfilled: false,
+          isRejected: false,
+          data: null,
+          err: null,
+        },
+      };
+    },
+    close: (prevState) => {
+      return {
+        ...prevState,
+        login: {
+          isLoading: false,
+          isFulfilled: false,
+          isRejected: false,
+          data: null,
+          err: null,
+        },
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(registrationThunk.pending, (prevState) => {
       return {
@@ -255,7 +285,7 @@ const membershipSlice = createSlice({
           isLoading: false,
           isFulfilled: false,
           isRejected: true,
-          data: { msg: action.error.message },
+          data: action,
           err: action.error.message,
         },
       };
@@ -294,7 +324,7 @@ const membershipSlice = createSlice({
           isLoading: false,
           isFulfilled: false,
           isRejected: true,
-          data: { msg: action.error.message },
+          data: action,
           err: action.error.message,
         },
       };
@@ -333,7 +363,7 @@ const membershipSlice = createSlice({
           isLoading: false,
           isFulfilled: false,
           isRejected: true,
-          data: { msg: action.error.message },
+          data: action,
           err: action.error.message,
         },
       };
@@ -372,7 +402,7 @@ const membershipSlice = createSlice({
           isLoading: false,
           isFulfilled: false,
           isRejected: true,
-          data: { msg: action.error.message },
+          data: action,
           err: action.error.message,
         },
       };

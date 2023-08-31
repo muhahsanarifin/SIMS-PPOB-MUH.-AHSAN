@@ -53,13 +53,13 @@ const getBalanceThunk = createAsyncThunk(
     try {
       typeof cbPending === "function" && cbPending();
       const response = await transaction.getBalance(accessToken);
-      console.log("Data get balanve:", response);
+      console.log("Data get balance:", response);
       typeof cbFulfilled === "function" && cbFulfilled(response.data);
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data?.msg);
-        throw error.response.data?.msg;
+        console.error(error.response);
+        throw error.response.data;
       } else {
         console.error(error);
         throw error;
@@ -87,8 +87,8 @@ const topupThunk = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data?.msg);
-        throw error.response.data?.msg;
+        console.error(error.response.data);
+        throw error.response.data;
       } else {
         console.error(error);
         throw error;
@@ -116,8 +116,8 @@ const transactionThunk = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data?.msg);
-        throw error.response.data?.msg;
+        console.error(error.response);
+        throw error.response;
       } else {
         console.error(error);
         throw error;
@@ -135,17 +135,21 @@ const getTransactionHistoryThunk = createAsyncThunk(
     cbFulfilled,
     cbFinally,
     accessToken,
+    queryParams,
   }: ArgGetTransactionHistoryThunk) => {
     try {
       typeof cbPending === "function" && cbPending();
-      const response = await transaction.getTransactionHistory(accessToken);
+      const response = await transaction.getTransactionHistory(
+        accessToken,
+        queryParams
+      );
       console.log("Data history transaction:", response);
       typeof cbFulfilled === "function" && cbFulfilled(response.data);
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data?.msg);
-        throw error.response.data?.msg;
+        console.error(error.response);
+        throw error.response;
       } else {
         console.error(error);
         throw error;
@@ -195,7 +199,7 @@ const transactionSlice = createSlice({
           isLoading: false,
           isFulfilled: false,
           isRejected: true,
-          data: { msg: action.error.message },
+          data: action,
           err: action.error.message,
         },
       };
@@ -234,7 +238,7 @@ const transactionSlice = createSlice({
           isLoading: false,
           isFulfilled: false,
           isRejected: true,
-          data: { msg: action.error.message },
+          data: action,
           err: action.error.message,
         },
       };
@@ -273,7 +277,7 @@ const transactionSlice = createSlice({
           isLoading: false,
           isFulfilled: false,
           isRejected: true,
-          data: { msg: action.error.message },
+          data: action,
           err: action.error.message,
         },
       };
@@ -314,7 +318,7 @@ const transactionSlice = createSlice({
             isLoading: false,
             isFulfilled: false,
             isRejected: true,
-            data: { msg: action.error.message },
+            data: action,
             err: action.error.message,
           },
         };
@@ -323,7 +327,7 @@ const transactionSlice = createSlice({
   },
 });
 
-export const membershipAction = {
+export const transactionAction = {
   ...transactionSlice.actions,
   getBalanceThunk,
   topupThunk,

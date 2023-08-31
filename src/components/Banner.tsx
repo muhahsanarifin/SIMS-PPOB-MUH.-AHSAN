@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../redux/store";
+import { informationAction } from "../redux/reducers/information";
 import AuthBanner from "../assets/images/Illustrasi Login.png";
-import BannerOne from "../assets/images/Banner 1.png";
+import { Skaleton } from "./Loader";
 
 export const Auth: React.FC = () => {
   return (
@@ -13,17 +16,32 @@ export const Auth: React.FC = () => {
 };
 
 export const Home: React.FC = () => {
+  const useAppDispatch: () => AppDispatch = useDispatch;
+  const dispatch = useAppDispatch();
+  const login = useSelector((state: RootState) => state.membership.login);
+  const banner = useSelector((state: RootState) => state.information.getBanner);
+
+  // Get banner
+  useEffect(() => {
+    const accessToken = login.data?.data.token;
+    dispatch(informationAction.getBannerThunk({ accessToken }));
+  }, [dispatch, login.data?.data.token]);
+
   return (
     <>
       <div>
         <p className="text-sm font-semibold">Temukan promo menarik</p>
-        <ul className="flex gap-x-6 mt-2">
-          {new Array(4).fill(1).map((_, idx) => (
-            <li key={idx}>
-              <img src={BannerOne} alt="" />
-            </li>
-          ))}
-        </ul>
+        {banner.isLoading ? (
+          <Skaleton.Banner />
+        ) : (
+          <ul className="flex gap-x-6 mt-2">
+            {banner?.data?.data?.map((el: any, idx: any) => (
+              <li key={idx}>
+                <img src={el.banner_image} alt={el.banner_name} />
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </>
   );

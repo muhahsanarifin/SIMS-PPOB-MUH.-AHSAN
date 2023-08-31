@@ -42,8 +42,8 @@ const getBannerThunk = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data?.msg);
-        throw error.response.data?.msg;
+        console.error(error.response.data);
+        throw error.response.data;
       } else {
         console.error(error);
         throw error;
@@ -70,8 +70,8 @@ const getServicesThunk = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data?.msg);
-        throw error.response.data?.msg;
+        console.error(error.response.data);
+        throw error.response.data;
       } else {
         console.error(error);
         throw error;
@@ -121,7 +121,7 @@ const informationSlice = createSlice({
           isLoading: false,
           isFulfilled: false,
           isRejected: true,
-          data: { msg: action.error.message },
+          data: action,
           err: action.error.message,
         },
       };
@@ -160,7 +160,7 @@ const informationSlice = createSlice({
           isLoading: false,
           isFulfilled: false,
           isRejected: true,
-          data: { msg: action.error.message },
+          data: action,
           err: action.error.message,
         },
       };

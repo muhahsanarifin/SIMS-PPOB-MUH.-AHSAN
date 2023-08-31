@@ -19,5 +19,8 @@ export const topup = (accessToken: string, body: object) =>
 export const transaction = (accessToken: string, body: object) =>
   Axios.post(BASE_URL + "/transaction", body, config(accessToken));
 
-export const getTransactionHistory = (accessToken: string) =>
-  Axios.get(BASE_URL + "/transaction/history", config(accessToken));
+export const getTransactionHistory = (accessToken: string, queryParams: any) =>
+  Axios.get(
+    BASE_URL + "/transaction/history" + `?${queryParams}`,
+    config(accessToken)
+  );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../redux/store";
@@ -34,15 +34,20 @@ export const Login: React.FC = () => {
 
   // Handle Submit
   const handleSubmit = () => {
-    dispatch(membershipAction.loginThunk({ body }));
+    
+    const cbFulfilled = () => {
+      if (login.isFulfilled) {
+        navigate("/home");
+      }
+    };
+
+    dispatch(membershipAction.loginThunk({ body, cbFulfilled }));
   };
 
-  // Navigate to "/home"
-  useEffect(() => {
-    if (login.isFulfilled) {
-      navigate("/home");
-    }
-  }, [navigate, login.isFulfilled]);
+  // Handle error modal
+  const handleErrorModal = () => {
+    dispatch(membershipAction.close())
+  };
 
   return (
     <>
@@ -151,7 +156,7 @@ export const Login: React.FC = () => {
           <div className="absolute bg-[#fee2e2] bottom-6 inset-x-2 py-1 px-2 text-[#f3271c] flex items-center">
             <p className="text-xs">{login?.err}</p>
             <button
-              onClick={() => console.log("Close test!")}
+              onClick={handleErrorModal}
               className="ml-auto"
             >
               <Icon icon="material-symbols:close" color="#f3271c" width="16" />
@@ -204,29 +209,21 @@ export const Register: React.FC = () => {
       password: password,
     };
 
-    dispatch(membershipAction.registrationThunk({ body }));
-  };
-
-  // Navigate to "/home" when register is success
-  useEffect(() => {
-    if (registration.isFulfilled) {
-      const body = {
-        email: email,
-        password: password,
-      };
-      dispatch(membershipAction.loginThunk({ body }));
-      if (login.isFulfilled) {
-        navigate("/home");
+    const cbFulfilled = () => {
+      if (registration.isFulfilled) {
+        const body = {
+          email: email,
+          password: password,
+        };
+        dispatch(membershipAction.loginThunk({ body }));
+        if (login.isFulfilled) {
+          navigate("/home");
+        }
       }
-    }
-  }, [
-    dispatch,
-    email,
-    password,
-    navigate,
-    registration.isFulfilled,
-    login.isFulfilled,
-  ]);
+    };
+
+    dispatch(membershipAction.registrationThunk({ body, cbFulfilled }));
+  };
 
   return (
     <>
