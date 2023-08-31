@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../redux/store";
 import { membershipAction } from "../redux/reducers/membership";
+import { transactionAction } from "../redux/reducers/transaction";
 import { Icon } from "@iconify/react";
 import * as icon from "../utils/icon";
 
@@ -155,6 +156,7 @@ export const Account: React.FC = () => {
   // Handle logout
   const handleLogout = () => {
     dispatch(membershipAction.logout());
+    dispatch(transactionAction.clearPurchase());
   };
 
   return (

@@ -55,6 +55,9 @@ export const Payment: React.FC = () => {
   const confirmPayment = useSelector(
     (state: RootState) => state.transaction.confirmPayment
   );
+  const balance = useSelector(
+    (state: RootState) => state.transaction.getBalance
+  );
 
   const handleConfirmPayment = () => {
     dispatch(transactionAction.confirmPayment(purchase?.data));
@@ -79,7 +82,9 @@ export const Payment: React.FC = () => {
         <Rino onValue={purchase?.data?.service_tariff} onRead={true} />
         <Button.PayTup
           onTitle="Bayar"
-          onDisable={!purchase?.isFulfilled}
+          onDisable={
+            !purchase?.isFulfilled || balance.data?.data?.balance === 0
+          }
           setClick={handleConfirmPayment}
         />
       </div>

@@ -22,7 +22,14 @@ export const PeMo: React.FC = () => {
     const body = {
       service_code: confirmPayment?.data?.service_code,
     };
-    dispatch(transactionAction.transactionThunk({ accessToken, body }));
+
+    const cbFulfilled = () => {
+      dispatch(transactionAction.getBalanceThunk({ accessToken }));
+    };
+
+    dispatch(
+      transactionAction.transactionThunk({ accessToken, body, cbFulfilled })
+    );
   };
 
   const cancelPayment = () => {

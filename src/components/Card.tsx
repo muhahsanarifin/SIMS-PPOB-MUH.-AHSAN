@@ -24,6 +24,7 @@ export const Saldo: React.FC = () => {
     (state: RootState) => state.transaction.getBalance
   );
 
+
   return (
     <>
       <div className="w-1/2 bg-[#f13b2f] rounded-lg p-5 text-[#fafafa]">
