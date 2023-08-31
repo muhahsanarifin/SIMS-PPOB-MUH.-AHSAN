@@ -31,5 +31,5 @@ export const getProfile = (accessToken: string) =>
 export const updateProfile = (accessToken: string, body: object) =>
   Axios.put(BASE_URL + "/profile/update", body, config(accessToken));
 
-export const updateProfileImage = (accessToken: string, body: object) =>
-  Axios.put(BASE_URL + "/profile/update", body, anotherConfig(accessToken));
+export const updateProfileImage = (accessToken: string, body: any) =>
+  Axios.put(BASE_URL + "/profile/image", body, anotherConfig(accessToken));

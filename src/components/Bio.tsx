@@ -4,16 +4,55 @@ import type { AppDispatch, RootState } from "../redux/store";
 import { membershipAction } from "../redux/reducers/membership";
 import { Icon } from "@iconify/react";
 import * as icon from "../utils/icon";
-import Logo from "../assets/icons/Logo.png";
 
 export const Image: React.FC<{ onSize: string }> = ({ onSize }) => {
-  const condition = true;
+  const useAppDispatch: () => AppDispatch = useDispatch;
+  const dispatch = useAppDispatch();
+  const login = useSelector((state: RootState) => state.membership.login);
+  const profile = useSelector(
+    (state: RootState) => state.membership?.getProfile
+  );
+  const updateProfileImage = useSelector(
+    (state: RootState) => state.membership.updateProfileImage
+  );
+
+  const handleImage = (e: any) => {
+    console.log(e.target.files[0]);
+
+    if (e.target.files[0]) {
+      const body = new FormData();
+
+      body.append("file", e.target.files[0]);
+
+      const accessToken = login.data?.data?.token;
+
+      const cbFinally = () => {
+        dispatch(membershipAction.getProfileThunk({ accessToken }));
+      };
+
+      dispatch(
+        membershipAction.updateProfileImageThunk({
+          body,
+          accessToken,
+          cbFinally,
+        })
+      );
+    }
+  };
+
   return (
     <>
-      {condition ? (
-        <div className={`rounded-full bg-[#e5e5e5] ${onSize}`}></div>
+      {profile.data?.data?.profile_image.slice(-4) === "null" ||
+      updateProfileImage?.isLoading ? (
+        <div
+          className={`animate-pulse rounded-full bg-[#e5e5e5] ${onSize}`}
+        ></div>
       ) : (
-        <img src={Logo} alt="" className={`${onSize} rounded-full`} />
+        <img
+          src={profile.data?.data?.profile_image}
+          alt={`${profile.data?.data?.first_name} ${profile.data?.data?.last_name}`}
+          className={`${onSize} rounded-full`}
+        />
       )}
       <span className="absolute bottom-0 right-1 border border-solid rounded-full bg-white p-1">
         <label htmlFor="profile_image">
@@ -28,6 +67,7 @@ export const Image: React.FC<{ onSize: string }> = ({ onSize }) => {
           name="profile_image"
           id="profile_image"
           className="hidden"
+          onChange={handleImage}
         />
       </span>
     </>
@@ -44,14 +84,14 @@ export const Profile: React.FC = () => {
 
   // Get profile
   useEffect(() => {
-    const accessToken = login.data?.data.token;
+    const accessToken = login.data?.data?.token;
     dispatch(membershipAction.getProfileThunk({ accessToken }));
   }, [dispatch, login.data?.data.token]);
 
   return (
     <>
       <div className="w-1/2">
-        {profile?.data?.data?.profile_image.slice(-4) === "null" ? (
+        {profile.data?.data?.profile_image.slice(-4) === "null" ? (
           <div className="relative w-fit p-3">
             <Image onSize="w-16 h-16" />
           </div>
@@ -62,15 +102,15 @@ export const Profile: React.FC = () => {
         ) : (
           <div className=" w-fit p-3">
             <img
-              src={profile?.data?.data?.profile_image}
-              alt={`${profile?.data?.data?.first_name} ${profile?.data?.data?.last_name}`}
+              src={profile.data?.data?.profile_image}
+              alt={`${profile.data?.data?.first_name} ${profile.data?.data?.last_name}`}
               className="w-16 h-16 rounded-full"
             />
           </div>
         )}
         <p className="text-sm mt-2">Selamat datang,</p>
         <h1 className="text-xl font-semibold">
-          {profile?.data?.data?.first_name} {profile?.data?.data?.last_name}
+          {profile.data?.data?.first_name} {profile?.data?.data?.last_name}
         </h1>
       </div>
     </>

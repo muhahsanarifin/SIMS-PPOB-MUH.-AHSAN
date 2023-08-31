@@ -50,7 +50,7 @@ export const Transaction: React.FC = () => {
       <ul>
         {new Array(3).fill(0).map((_, idx) => (
           <li key={idx} className="flex my-3">
-            <div className="rounded-lg animate-pulse h-[79.2px] w-[1263.2px] bg-[#e5e5e5]"></div>
+            <div className="rounded-lg animate-pulse h-[79.2px] w-full bg-[#e5e5e5]"></div>
           </li>
         ))}
       </ul>
