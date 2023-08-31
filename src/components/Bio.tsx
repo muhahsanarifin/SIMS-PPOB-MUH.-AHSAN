@@ -87,8 +87,8 @@ export const Account: React.FC = () => {
   );
 
   // Handle input
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
+  const [first_name, setFirstName] = useState<string>("");
+  const [last_name, setLastName] = useState<string>("");
 
   useEffect(() => {
     setFirstName(profile.data?.data?.first_name);
@@ -97,10 +97,7 @@ export const Account: React.FC = () => {
 
   const handleSave = () => {
     const accessToken = login.data?.data.token;
-    const body = {
-      first_name: firstName,
-      last_name: lastName,
-    };
+    const body = { first_name, last_name };
 
     const cbFulfilled = () => {
       // Update getProfile state
@@ -172,7 +169,7 @@ export const Account: React.FC = () => {
                 !activeEdit && "cursor-not-allowed"
               }`}
               placeholder="nama depan"
-              value={firstName}
+              value={first_name}
               onChange={(e) => setFirstName(e.target.value)}
               disabled={!activeEdit}
             />
@@ -201,7 +198,7 @@ export const Account: React.FC = () => {
                 !activeEdit && "cursor-not-allowed"
               }`}
               placeholder="nama belakang"
-              value={lastName}
+              value={last_name}
               onChange={(e) => setLastName(e.target.value)}
               disabled={!activeEdit}
             />

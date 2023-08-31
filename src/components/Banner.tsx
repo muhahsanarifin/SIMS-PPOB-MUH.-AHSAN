@@ -36,7 +36,7 @@ export const Home: React.FC = () => {
         ) : (
           <ul className="flex gap-x-6 mt-2">
             {banner?.data?.data?.map((el: any, idx: any) => (
-              <li key={idx}>
+              <li key={idx} className="transition duration-500 hover:scale-105">
                 <img src={el.banner_image} alt={el.banner_name} />
               </li>
             ))}

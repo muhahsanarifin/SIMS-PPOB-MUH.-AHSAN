@@ -26,12 +26,29 @@ const initialState: TransactionState = {
     data: null,
     err: null,
   },
+  // Top Up confirmation state
+  confirmTopUp: {
+    isFulfilled: false,
+    isRejected: false,
+    data: null,
+  },
+  purchase: {
+    isFulfilled: false,
+    isRejected: false,
+    data: null,
+  },
   transaction: {
     isLoading: false,
     isFulfilled: false,
     isRejected: false,
     data: null,
     err: null,
+  },
+  // Payment confirmation state
+  confirmPayment: {
+    isFulfilled: false,
+    isRejected: false,
+    data: null,
   },
   getTransactionHistory: {
     isLoading: false,
@@ -53,15 +70,15 @@ const getBalanceThunk = createAsyncThunk(
     try {
       typeof cbPending === "function" && cbPending();
       const response = await transaction.getBalance(accessToken);
-      console.log("Data get balance:", response);
+      // console.log("Data get balance:", response);
       typeof cbFulfilled === "function" && cbFulfilled(response.data);
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response);
+        // console.error(error.response);
         throw error.response.data;
       } else {
-        console.error(error);
+        // console.error(error);
         throw error;
       }
     } finally {
@@ -82,15 +99,15 @@ const topupThunk = createAsyncThunk(
     try {
       typeof cbPending === "function" && cbPending();
       const response = await transaction.topup(accessToken, body);
-      console.log("Data topup:", response);
+      // console.log("Data topup:", response);
       typeof cbFulfilled === "function" && cbFulfilled(response.data);
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data);
+        // console.error(error.response.data);
         throw error.response.data;
       } else {
-        console.error(error);
+        // console.error(error);
         throw error;
       }
     } finally {
@@ -110,16 +127,16 @@ const transactionThunk = createAsyncThunk(
   }: ArgTransactionThunk) => {
     try {
       typeof cbPending === "function" && cbPending();
-      const response = await transaction.topup(accessToken, body);
-      console.log("Data transaction:", response);
+      const response = await transaction.transaction(accessToken, body);
+      // console.log("Data transaction:", response);
       typeof cbFulfilled === "function" && cbFulfilled(response.data);
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response);
+        // console.error(error.response);
         throw error.response;
       } else {
-        console.error(error);
+        // console.error(error);
         throw error;
       }
     } finally {
@@ -143,15 +160,15 @@ const getTransactionHistoryThunk = createAsyncThunk(
         accessToken,
         queryParams
       );
-      console.log("Data history transaction:", response);
+      // console.log("Data history transaction:", response);
       typeof cbFulfilled === "function" && cbFulfilled(response.data);
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response);
+        // console.error(error.response);
         throw error.response;
       } else {
-        console.error(error);
+        // console.error(error);
         throw error;
       }
     } finally {
@@ -163,7 +180,87 @@ const getTransactionHistoryThunk = createAsyncThunk(
 const transactionSlice = createSlice({
   name: "transaction",
   initialState,
-  reducers: {},
+  reducers: {
+    confirmTopUp: (prevState, action) => {
+      return {
+        ...prevState,
+        confirmTopUp: {
+          isFulfilled: true,
+          isRejected: false,
+          data: action.payload,
+        },
+      };
+    },
+    closeTopUp: (prevState) => {
+      return {
+        ...prevState,
+        confirmTopUp: {
+          isFulfilled: false,
+          isRejected: false,
+          data: null,
+        },
+      };
+    },
+    clearTopUp: (prevState) => {
+      return {
+        ...prevState,
+        topup: {
+          isLoading: false,
+          isFulfilled: false,
+          isRejected: false,
+          data: null,
+          err: null,
+        },
+      };
+    },
+    purchase: (prevState, action) => {
+      return {
+        ...prevState,
+        purchase: {
+          isFulfilled: true,
+          isRejected: false,
+          data: action.payload,
+        },
+      };
+    },
+    clearPurchase: (prevState) => {
+      return {
+        ...prevState,
+        purchase: {
+          isFulfilled: false,
+          isRejected: false,
+          data: null,
+        },
+      };
+    },
+    confirmPayment: (prevState, action) => {
+      return {
+        ...prevState,
+        confirmPayment: {
+          isFulfilled: true,
+          isRejected: false,
+          data: action.payload,
+        },
+      };
+    },
+    closePayment: (prevState) => {
+      return {
+        ...prevState,
+        confirmPayment: {
+          isFulfilled: false,
+          isRejected: false,
+          data: null,
+        },
+        transaction: {
+          isLoading: false,
+          isFulfilled: false,
+          isRejected: false,
+          data: null,
+          err: null,
+        },
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getBalanceThunk.pending, (prevState) => {
       return {

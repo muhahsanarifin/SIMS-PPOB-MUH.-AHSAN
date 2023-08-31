@@ -3,12 +3,12 @@ import * as Banner from "../components/Banner";
 
 const Login = () => {
   return (
-    <>
+    <main>
       <section className="relative h-screen flex">
         <Form.Login />
         <Banner.Auth />
       </section>
-    </>
+    </main>
   );
 };
 

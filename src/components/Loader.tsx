@@ -34,7 +34,7 @@ export const Banner: React.FC = () => {
   return (
     <>
       <ul className="flex gap-x-6 mt-2">
-        {new Array(5).fill(0).map((_, idx) => (
+        {new Array(4).fill(0).map((_, idx) => (
           <li key={idx}>
             <div className="animate-pulse w-[237.675px] h-[106.113px] rounded-md bg-[#e5e5e5]"></div>
           </li>
@@ -48,7 +48,7 @@ export const Transaction: React.FC = () => {
   return (
     <>
       <ul>
-        {new Array(5).fill(0).map((_, idx) => (
+        {new Array(3).fill(0).map((_, idx) => (
           <li key={idx} className="flex my-3">
             <div className="rounded-lg animate-pulse h-[79.2px] w-[1263.2px] bg-[#e5e5e5]"></div>
           </li>

@@ -23,7 +23,7 @@ export const Auth: React.FC<ButtonType.AuthButtonProps> = ({
 };
 
 // This button used by for Payment and Top Up
-export const PayTup: React.FC<ButtonType.AuthButtonProps> = ({
+export const PayTup: React.FC<ButtonType.PayTup> = ({
   onTitle,
   onDisable,
   setClick,

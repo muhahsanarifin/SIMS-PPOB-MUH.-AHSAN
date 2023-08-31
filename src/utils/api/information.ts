@@ -2,8 +2,6 @@ import Axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_API_SIMS_PPOB;
 
-console.log(BASE_URL);
-
 const config = (accessToken: string) => {
   return {
     headers: {

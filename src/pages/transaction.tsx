@@ -5,7 +5,7 @@ import * as Table from "../components/Table";
 
 const Transaction = () => {
   return (
-    <>
+    <main className="min-h-screen">
       <section className="relative">
         <Header onDisable="transaction" />
       </section>
@@ -14,9 +14,9 @@ const Transaction = () => {
         <Card.Saldo />
       </section>
       <section className="px-32 flex flex-col py-4 my-4">
-        <Table.Transaction/>
+        <Table.Transaction />
       </section>
-    </>
+    </main>
   );
 };
 

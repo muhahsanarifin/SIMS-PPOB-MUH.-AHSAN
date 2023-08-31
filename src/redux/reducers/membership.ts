@@ -56,7 +56,7 @@ const registrationThunk = createAsyncThunk(
     try {
       typeof cbPending === "function" && cbPending();
       const response = await membership.registration(body);
-      console.log("Data regisration:", response);
+      // console.log("Data regisration:", response);
       typeof cbFulfilled === "function" && cbFulfilled(response);
       return response.data;
     } catch (error: any) {
@@ -107,15 +107,15 @@ const getProfileThunk = createAsyncThunk(
     try {
       typeof cbPending === "function" && cbPending();
       const response = await membership.getProfile(accessToken);
-      console.log("Data get profile:", response);
+      // console.log("Data get profile:", response);
       typeof cbFulfilled === "function" && cbFulfilled(response.data);
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data);
+        // console.error(error.response.data);
         throw error.response.data;
       } else {
-        console.error(error);
+        // console.error(error);
         throw error;
       }
     } finally {
@@ -136,15 +136,15 @@ const updateProfieThunk = createAsyncThunk(
     try {
       typeof cbPending === "function" && cbPending();
       const response = await membership.updateProfile(accessToken, body);
-      console.log("Data update profile:", response);
+      // console.log("Data update profile:", response);
       typeof cbFulfilled === "function" && cbFulfilled(response.data);
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data);
+        // console.error(error.response.data);
         throw error.response.data;
       } else {
-        console.error(error);
+        // console.error(error);
         throw error;
       }
     } finally {
@@ -165,15 +165,15 @@ const updateProfileImageThunk = createAsyncThunk(
     try {
       typeof cbPending === "function" && cbPending();
       const response = await membership.updateProfileImage(accessToken, body);
-      console.log("Data update profile image:", response);
+      // console.log("Data update profile image:", response);
       typeof cbFulfilled === "function" && cbFulfilled(response.data);
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data);
+        // console.error(error.response.data);
         throw error.response.data;
       } else {
-        console.error(error);
+        // console.error(error);
         throw error;
       }
     } finally {

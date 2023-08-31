@@ -37,15 +37,15 @@ const getBannerThunk = createAsyncThunk(
     try {
       typeof cbPending === "function" && cbPending();
       const response = await information.getBanner(accessToken);
-      console.log("Data get banner:", response);
+      // console.log("Data get banner:", response);
       typeof cbFulfilled === "function" && cbFulfilled(response.data);
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data);
+        // console.error(error.response.data);
         throw error.response.data;
       } else {
-        console.error(error);
+        // console.error(error);
         throw error;
       }
     } finally {
@@ -65,15 +65,15 @@ const getServicesThunk = createAsyncThunk(
     try {
       typeof cbPending === "function" && cbPending();
       const response = await information.getServices(accessToken);
-      console.log("Data get services:", response);
+      // console.log("Data get services:", response);
       typeof cbFulfilled === "function" && cbFulfilled(response.data);
       return response.data;
     } catch (error: any) {
       if (error.response) {
-        console.error(error.response.data);
+        // console.error(error.response.data);
         throw error.response.data;
       } else {
-        console.error(error);
+        // console.error(error);
         throw error;
       }
     } finally {

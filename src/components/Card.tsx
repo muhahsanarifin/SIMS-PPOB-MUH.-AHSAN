@@ -4,6 +4,7 @@ import type { AppDispatch, RootState } from "../redux/store";
 import { Icon } from "@iconify/react";
 import * as icon from "../utils/icon";
 import { transactionAction } from "../redux/reducers/transaction";
+import { numberFormat } from "../helpers/intl";
 
 export const Saldo: React.FC = () => {
   const useAppDispatch: () => AppDispatch = useDispatch;
@@ -32,8 +33,8 @@ export const Saldo: React.FC = () => {
           <input
             type={visibleSaldo ? "text" : "password"}
             disabled
-            className="bg-transparent"
-            value={balance.data?.data?.balance}
+            className="bg-transparent border-none"
+            value={numberFormat(balance.data?.data?.balance)}
           />
         </h1>
 

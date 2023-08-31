@@ -4,11 +4,16 @@ import * as Bio from "../components/Bio";
 import * as Card from "../components/Card";
 import * as Banner from "../components/Banner";
 import * as Input from "../components/Input";
+import { useSelector } from "react-redux";
+import type { RootState } from "../redux/store";
 
 const Home = () => {
-  const condtition = true;
+  const purchase = useSelector(
+    (state: RootState) => state.transaction.purchase
+  );
+
   return (
-    <>
+    <main className="min-h-screen">
       <section className="relative">
         <Header onDisable="home" />
       </section>
@@ -16,7 +21,11 @@ const Home = () => {
         <Bio.Profile />
         <Card.Saldo />
       </section>
-      {condtition ? (
+      {purchase?.isFulfilled ? (
+        <section className="relative px-32 flex flex-col py-4 my-4">
+          <Input.Payment />
+        </section>
+      ) : (
         <>
           <section className="px-32 flex py-4 my-4">
             <Feature.Home />
@@ -25,12 +34,8 @@ const Home = () => {
             <Banner.Home />
           </section>
         </>
-      ) : (
-        <section className="px-32 flex flex-col py-4 my-4">
-          <Input.Payment/>
-        </section>
       )}
-    </>
+    </main>
   );
 };
 
