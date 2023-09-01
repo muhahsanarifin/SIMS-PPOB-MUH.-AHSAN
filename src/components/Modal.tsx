@@ -137,7 +137,7 @@ export const ToMo: React.FC<{ [key: string]: any }> = ({
 
           {!onSuccess && (
             <div className="flex flex-col items-center">
-              <p className="text-xs font-semibold text-[#9ca3af]">
+              <p className="text-xs font-semibold text-[#9ca3af] text-center">
                 Anda yakin untuk Top Up sebesar
               </p>
 
