@@ -34,7 +34,6 @@ export const Login: React.FC = () => {
 
   // Handle Submit
   const handleSubmit = () => {
-    
     const cbFulfilled = () => {
       if (login.isFulfilled) {
         navigate("/home");
@@ -46,7 +45,7 @@ export const Login: React.FC = () => {
 
   // Handle error modal
   const handleErrorModal = () => {
-    dispatch(membershipAction.close())
+    dispatch(membershipAction.close());
   };
 
   return (
@@ -155,10 +154,7 @@ export const Login: React.FC = () => {
         {login?.isRejected && (
           <div className="absolute bg-[#fee2e2] bottom-6 inset-x-2 py-1 px-2 text-[#f3271c] flex items-center">
             <p className="text-xs">{login?.err}</p>
-            <button
-              onClick={handleErrorModal}
-              className="ml-auto"
-            >
+            <button onClick={handleErrorModal} className="ml-auto">
               <Icon icon="material-symbols:close" color="#f3271c" width="16" />
             </button>
           </div>
@@ -203,22 +199,20 @@ export const Register: React.FC = () => {
 
   const handleRegister = () => {
     const body = {
-      email: email,
-      first_name: first_name,
-      last_name: last_name,
-      password: password,
+      email,
+      first_name,
+      last_name,
+      password,
     };
 
     const cbFulfilled = () => {
-      if (registration.isFulfilled) {
-        const body = {
-          email: email,
-          password: password,
-        };
-        dispatch(membershipAction.loginThunk({ body }));
-        if (login.isFulfilled) {
-          navigate("/home");
-        }
+      const body = {
+        email,
+        password,
+      };
+      dispatch(membershipAction.loginThunk({ body }));
+      if (login?.isFulfilled) {
+        navigate("/home");
       }
     };
 
