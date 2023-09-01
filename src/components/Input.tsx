@@ -117,7 +117,7 @@ export const TopUp: React.FC = () => {
 
   // Handle Top Up
   const handleConfirmTopUp = () => {
-    const amount = { top_up_amount };
+    const amount = { top_up_amount: Number(top_up_amount) };
     dispatch(transactionAction.confirmTopUp(amount));
   };
 
@@ -147,12 +147,16 @@ export const TopUp: React.FC = () => {
       <div className="flex gap-x-8">
         <div className="flex flex-col gap-y-4 flex-1">
           <Rino
-            setChange={(e: any) => setTopUpAmount(Number(e.target.value))}
-            onValue={top_up_amount}
+            setChange={(e: any) => setTopUpAmount(e.target.value)}
+            onValue={top_up_amount < 0 ? "" : top_up_amount}
           />
           <Button.PayTup
             onTitle="Top Up"
-            onDisable={!top_up_amount}
+            onDisable={
+              !top_up_amount ||
+              Number(top_up_amount) < 10000 ||
+              Number(top_up_amount) > 1000000
+            }
             setClick={handleConfirmTopUp}
           />
         </div>
