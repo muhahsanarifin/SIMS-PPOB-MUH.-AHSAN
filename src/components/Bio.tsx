@@ -18,7 +18,6 @@ export const Image: React.FC<{ onSize: string }> = ({ onSize }) => {
   );
 
   const handleImage = (e: any) => {
-    console.log(e.target.files[0]);
 
     if (e.target.files[0]) {
       const body = new FormData();

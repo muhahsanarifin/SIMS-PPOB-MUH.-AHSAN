@@ -34,13 +34,7 @@ export const Login: React.FC = () => {
 
   // Handle Submit
   const handleSubmit = () => {
-    const cbFulfilled = () => {
-      if (login.isFulfilled) {
-        navigate("/home");
-      }
-    };
-
-    dispatch(membershipAction.loginThunk({ body, cbFulfilled }));
+    dispatch(membershipAction.loginThunk({ body }));
   };
 
   // Handle error modal

@@ -68,7 +68,8 @@ export const Transaction: React.FC = () => {
             ))}
           </ul>
         )}
-        {transactionHitory?.data?.data?.records.length !== 0 && (
+        {(transactionHitory?.data?.data?.records.length < 5 && offset === 0) ||
+        transactionHitory?.data?.data?.records.length === 0 ? null : (
           <button
             className="text-[#ef392d] font-bold mx-auto mt-2 transition duration-500 hover:scale-105"
             onClick={handleShowMore}

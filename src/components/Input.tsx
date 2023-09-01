@@ -63,7 +63,7 @@ export const Payment: React.FC = () => {
     dispatch(transactionAction.confirmPayment(purchase?.data));
   };
 
-  // Note: Handle payment script to be continued inside Payment Modal (Modal.tsx)
+  // Note: Handle payment script to be continued inside Payment Modal (Modal.tsx).
 
   return (
     <>
@@ -81,9 +81,14 @@ export const Payment: React.FC = () => {
       <div className="flex flex-col gap-y-4">
         <Rino onValue={purchase?.data?.service_tariff} onRead={true} />
         <Button.PayTup
-          onTitle="Bayar"
+          onTitle={
+            balance.data?.data?.balance < purchase?.data?.service_tariff
+              ? "Saldo anda tidak mencukupi, silakan top up terlebih dahulu"
+              : "Bayar"
+          }
           onDisable={
-            !purchase?.isFulfilled || balance.data?.data?.balance === 0
+            !purchase?.isFulfilled ||
+            balance.data?.data?.balance < purchase?.data?.service_tariff
           }
           setClick={handleConfirmPayment}
         />
@@ -103,8 +108,6 @@ export const TopUp: React.FC = () => {
   );
   const login = useSelector((state: RootState) => state.membership.login);
   const topup = useSelector((state: RootState) => state.transaction.topup);
-
-  console.log(topup);
 
   const value = [
     { title: "Rp.10.000", nominal: 10000 },
