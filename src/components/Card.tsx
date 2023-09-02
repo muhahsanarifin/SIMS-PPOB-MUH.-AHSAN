@@ -24,20 +24,21 @@ export const Saldo: React.FC = () => {
     (state: RootState) => state.transaction.getBalance
   );
 
-
   return (
     <>
       <div className="w-1/2 bg-[#f13b2f] rounded-lg p-5 text-[#fafafa]">
         <p className="text-sm">Saldo anda</p>
-        <h1 className="text-2xl font-bold my-2">
-          Rp{" "}
+        <div className="flex gap-x-2">
+          <h1 className="text-2xl font-bold my-2">Rp </h1>
           <input
             type={visibleSaldo ? "text" : "password"}
             disabled
-            className="bg-transparent border-none"
-            value={numberFormat(balance.data?.data?.balance)}
+            className="bg-transparent lg:w-full"
+            value={
+              balance?.isFulfilled && numberFormat(balance.data?.data?.balance)
+            }
           />
-        </h1>
+        </div>
 
         <label htmlFor="" className="text-xs flex gap-x-2 items-center">
           <span>lihat saldo</span>

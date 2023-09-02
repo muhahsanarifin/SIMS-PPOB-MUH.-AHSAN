@@ -14,23 +14,23 @@ const Home = () => {
 
   return (
     <main className="min-h-screen">
-      <section className="relative">
+      <section className="relative md:sticky md:top-0 md:z-50">
         <Header onDisable="home" />
       </section>
-      <section className="px-32 flex py-4 my-4">
+      <section className="px-32 flex py-4 my-4 lg:px-14 md:px-4">
         <Bio.Profile />
         <Card.Saldo />
       </section>
       {purchase?.isFulfilled ? (
-        <section className="relative px-32 flex flex-col py-4 my-4">
+        <section className="relative px-32 flex flex-col py-4 my-4 lg:px-14 md:px-4">
           <Input.Payment />
         </section>
       ) : (
         <>
-          <section className="px-32 flex py-4 my-4">
+          <section className="px-32 flex py-4 my-4 lg:px-14 md:px-4">
             <Feature.Home />
           </section>
-          <section className="px-32">
+          <section className="px-32 lg:px-14 md:px-4">
             <Banner.Home />
           </section>
         </>

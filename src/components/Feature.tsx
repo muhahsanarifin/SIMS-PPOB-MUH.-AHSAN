@@ -41,34 +41,36 @@ export const Home: React.FC = () => {
       {service.isLoading ? (
         <Skaleton.Feature />
       ) : (
-        <ul className="flex gap-x-4 w-full py-4">
-          {service?.data?.data?.map((el: any, idx: any) => (
-            <li
-              key={idx}
-              className="flex flex-col gap-y-1 mx-auto transition duration-500 hover:scale-105"
-            >
-              <button
-                className="mx-auto flex"
-                onClick={() =>
-                  handlePurchase(
-                    el.service_code,
-                    el.service_name,
-                    el.service_icon,
-                    el.service_tariff
-                  )
-                }
+        <ul className="flex w-full py-4">
+          <div className="flex gap-x-4 w-full lg:py-2 lg:overflow-x-auto ros">
+            {service?.data?.data?.map((el: any, idx: any) => (
+              <li
+                key={idx}
+                className="flex flex-col gap-y-1 mx-auto transition duration-500 hover:scale-105"
               >
-                <img
-                  src={el.service_icon}
-                  alt={el.service_code}
-                  className="rounded-md w-12"
-                />
-              </button>
-              <label htmlFor="" className="text-xs mx-auto text-center">
-                {el.service_name}
-              </label>
-            </li>
-          ))}
+                <button
+                  className="mx-auto flex"
+                  onClick={() =>
+                    handlePurchase(
+                      el.service_code,
+                      el.service_name,
+                      el.service_icon,
+                      el.service_tariff
+                    )
+                  }
+                >
+                  <img
+                    src={el.service_icon}
+                    alt={el.service_code}
+                    className="rounded-md w-12"
+                  />
+                </button>
+                <label htmlFor="" className="text-xs mx-auto text-center">
+                  {el.service_name}
+                </label>
+              </li>
+            ))}
+          </div>
         </ul>
       )}
     </>

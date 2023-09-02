@@ -8,7 +8,7 @@ import { Skaleton } from "./Loader";
 export const Auth: React.FC = () => {
   return (
     <>
-      <div className=" w-1/2">
+      <div className=" w-1/2 lg:hidden">
         <img src={AuthBanner} alt="Ilustrasi login" className="h-full w-full" />
       </div>
     </>
@@ -30,16 +30,21 @@ export const Home: React.FC = () => {
   return (
     <>
       <div>
-        <p className="text-sm font-semibold">Temukan promo menarik</p>
+        <p className="text-sm font-semibold md:w-fit">Temukan promo menarik</p>
         {banner.isLoading ? (
           <Skaleton.Banner />
         ) : (
-          <ul className="flex gap-x-6 mt-2">
-            {banner?.data?.data?.map((el: any, idx: any) => (
-              <li key={idx} className="transition duration-500 hover:scale-105">
-                <img src={el.banner_image} alt={el.banner_name} />
-              </li>
-            ))}
+          <ul className="flex mt-2 ">
+            <div className="flex gap-x-6 lg:overflow-x-auto ros">
+              {banner?.data?.data?.map((el: any, idx: any) => (
+                <li
+                  key={idx}
+                  className="transition duration-500 hover:scale-105 "
+                >
+                  <img src={el.banner_image} alt={el.banner_name} />
+                </li>
+              ))}
+            </div>
           </ul>
         )}
       </div>

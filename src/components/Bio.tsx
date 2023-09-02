@@ -18,7 +18,6 @@ export const Image: React.FC<{ onSize: string }> = ({ onSize }) => {
   );
 
   const handleImage = (e: any) => {
-
     if (e.target.files[0]) {
       const body = new FormData();
 
@@ -43,6 +42,7 @@ export const Image: React.FC<{ onSize: string }> = ({ onSize }) => {
   return (
     <>
       {profile.data?.data?.profile_image.slice(-4) === "null" ||
+      profile?.isLoading ||
       updateProfileImage?.isLoading ? (
         <div
           className={`animate-pulse rounded-full bg-[#e5e5e5] ${onSize}`}
@@ -110,7 +110,8 @@ export const Profile: React.FC = () => {
         )}
         <p className="text-sm mt-2">Selamat datang,</p>
         <h1 className="text-xl font-semibold">
-          {profile.data?.data?.first_name} {profile?.data?.data?.last_name}
+          {profile?.isFulfilled &&
+            `${profile.data?.data?.first_name} ${profile?.data?.data?.last_name}`}
         </h1>
       </div>
     </>
@@ -164,10 +165,13 @@ export const Account: React.FC = () => {
         <div className="relative mx-auto flex flex-col items-center p-1">
           <Image onSize="w-32 h-32" />
         </div>
-        <h1 className="text-xl font-semibold mx-auto">{`${profile.data?.data?.first_name} ${profile.data?.data?.last_name}`}</h1>
+        <h1 className="text-xl font-semibold mx-auto">
+          {profile?.isFulfilled &&
+            `${profile.data?.data?.first_name} ${profile?.data?.data?.last_name}`}
+        </h1>
       </div>
       <div className="flex flex-col gap-y-4 my-4 items-center">
-        <div className="w-1/2">
+        <div className="w-1/2 md:w-[85%]">
           <h1 className="text-sm mb-2">Email</h1>
           <label htmlFor="email" className="sr-only">
             Email
@@ -187,7 +191,7 @@ export const Account: React.FC = () => {
             />
           </div>
         </div>
-        <div className="w-1/2">
+        <div className="w-1/2 md:w-[85%]">
           <h1 className="text-sm mb-2">Nama Depan</h1>
           <label htmlFor="first_name" className="sr-only">
             Nama Depan
@@ -216,7 +220,7 @@ export const Account: React.FC = () => {
             />
           </div>
         </div>
-        <div className="w-1/2">
+        <div className="w-1/2 md:w-[85%]">
           <h1 className="text-sm mb-2">Nama Belakang</h1>
           <label htmlFor="last_name" className="sr-only">
             Nama Belakang
@@ -249,7 +253,7 @@ export const Account: React.FC = () => {
       <div className="flex flex-col items-center gap-y-4">
         {activeEdit ? (
           <button
-            className="w-1/2 p-4 text-sm rounded-lg bg-[#f42619] text-white outline-none font-semibold"
+            className="w-1/2 md:w-[85%] p-4 text-sm rounded-lg bg-[#f42619] text-white outline-none font-semibold"
             onClick={handleSave}
           >
             Simpan
@@ -257,13 +261,13 @@ export const Account: React.FC = () => {
         ) : (
           <>
             <button
-              className="w-1/2 p-4 text-sm rounded-lg bg-[#f42619] text-white outline-none font-semibold"
+              className="w-1/2 md:w-[85%] p-4 text-sm rounded-lg bg-[#f42619] text-white outline-none font-semibold"
               onClick={() => setActiveEdit(!activeEdit)}
             >
               Edit Profile
             </button>
             <button
-              className="w-1/2 p-4 text-sm rounded-lg border-2 border-solid border-[#f42619] text-[#f42619] outline-none font-semibold"
+              className="w-1/2 md:w-[85%] p-4 text-sm rounded-lg border-2 border-solid border-[#f42619] text-[#f42619] outline-none font-semibold"
               onClick={handleLogout}
             >
               Logout

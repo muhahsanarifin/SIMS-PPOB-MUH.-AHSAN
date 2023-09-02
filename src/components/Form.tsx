@@ -44,14 +44,14 @@ export const Login: React.FC = () => {
 
   return (
     <>
-      <div className="relative w-1/2 flex flex-col h-full">
+      <div className="relative w-1/2 flex flex-col h-full lg:w-full">
         <div className="my-auto">
           <div className="p-4 sm:p-6 lg:p-8  flex flex-col gap-y-4">
             <div className=" flex items-center gap-x-2 justify-center">
               <img src={Logo} alt="logo" className="w-[32px] h-[32px]" />
               <h3 className="font-semibold text-[24px]">SIMS PPOB</h3>
             </div>
-            <h1 className="text-center text-[24px] font-semibold w-[40%] mx-auto">
+            <h1 className="text-center text-[24px] font-semibold w-[40%] mx-auto lg:my-2 lg:w-full sm:w-[70%] sm:text-[18px]">
               Masuk atau buat akun untuk memulai
             </h1>
             {/* Email input */}
@@ -215,13 +215,13 @@ export const Register: React.FC = () => {
 
   return (
     <>
-      <div className=" w-1/2 flex flex-col my-auto">
+      <div className=" w-1/2 lg:w-full flex flex-col my-auto">
         <div className="p-4 sm:p-6 lg:p-8 flex flex-col gap-y-4">
           <div className=" flex items-center gap-x-2 justify-center">
             <img src={Logo} alt="logo" className="w-[32px] h-[32px]" />
             <h3 className="font-semibold text-[24px]">SIMS PPOB</h3>
           </div>
-          <h1 className="text-center text-[24px] font-semibold w-[40%] mx-auto">
+          <h1 className="text-center text-[24px] font-semibold w-[40%] mx-auto lg:my-2 lg:w-full sm:w-[70%] sm:text-[18px]">
             Lengkapi data untuk membuat akun
           </h1>
           {/* Email input */}

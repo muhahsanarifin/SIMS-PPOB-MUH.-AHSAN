@@ -147,7 +147,7 @@ export const TopUp: React.FC = () => {
         <p className="text-sm mb-1">Silakan masukan</p>
         <h1 className="text-xl font-bold">Nominal Top Up</h1>
       </div>
-      <div className="flex gap-x-8">
+      <div className="flex gap-x-8 md:flex-col-reverse md:gap-y-8">
         <div className="flex flex-col gap-y-4 flex-1">
           <Rino
             setChange={(e: any) => setTopUpAmount(e.target.value)}

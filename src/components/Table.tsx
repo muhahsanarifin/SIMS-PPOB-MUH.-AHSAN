@@ -35,13 +35,13 @@ export const Transaction: React.FC = () => {
       <div className="flex flex-col">
         {transactionHitory.isLoading ? (
           <Loader.Transaction />
-        ) : transactionHitory?.data?.data.records.length === 0 ? (
+        ) : transactionHitory?.data?.data?.records.length === 0 ? (
           <p className="text-[#d4d4d4] font-semibold text-center py-8">
             Maaf tidak ada histori transaksi saat ini
           </p>
         ) : (
           <ul>
-            {transactionHitory?.data?.data.records.map((el: any, idx: any) => (
+            {transactionHitory?.data?.data?.records.map((el: any, idx: any) => (
               <li
                 key={idx}
                 className="border-2 border-solid flex py-2 px-4 rounded-lg my-3"
