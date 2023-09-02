@@ -34,8 +34,11 @@ export const Saldo: React.FC = () => {
             type={visibleSaldo ? "text" : "password"}
             disabled
             className="bg-transparent lg:w-full"
+            // Value tobe string empty when balance state has'nt been fullfilled.
             value={
-              balance?.isFulfilled ? numberFormat(balance.data?.data?.balance) : ""
+              balance?.isFulfilled
+                ? numberFormat(balance.data?.data?.balance)
+                : ""
             }
           />
         </div>

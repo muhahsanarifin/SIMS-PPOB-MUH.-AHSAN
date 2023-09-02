@@ -30,7 +30,7 @@ const Header: React.FC<{ onDisable?: any }> = ({ onDisable }) => {
           onClick={() => navigate("/home")}
           disabled={onDisable === "home"}
         >
-          <img src={Logo} alt="logo" />
+          <img src={Logo} alt="logo" className="w-[32px] h-[32px]"/>
           <h3 className="font-semibold md:hidden">SIMS PPOPB</h3>
         </button>
         <div className="ml-auto flex lg:px-0">

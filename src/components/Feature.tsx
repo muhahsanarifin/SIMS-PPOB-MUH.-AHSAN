@@ -42,11 +42,11 @@ export const Home: React.FC = () => {
         <Skaleton.Feature />
       ) : (
         <ul className="flex w-full py-4">
-          <div className="flex gap-x-4 w-full lg:py-2 lg:overflow-x-auto ros">
+          <div className="flex gap-x-4 w-full py-4 overflow-x-auto ros">
             {service?.data?.data?.map((el: any, idx: any) => (
               <li
                 key={idx}
-                className="flex flex-col gap-y-1 mx-auto transition duration-500 hover:scale-105"
+                className="flex flex-col gap-y-1 mx-auto transition duration-500 hover:scale-105 hover:font-semibold min-w-[87.7386px]"
               >
                 <button
                   className="mx-auto flex"
@@ -65,9 +65,7 @@ export const Home: React.FC = () => {
                     className="rounded-md w-12"
                   />
                 </button>
-                <label htmlFor="" className="text-xs mx-auto text-center">
-                  {el.service_name}
-                </label>
+                <p className="text-xs mx-auto text-center">{el.service_name}</p>
               </li>
             ))}
           </div>

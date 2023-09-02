@@ -34,14 +34,14 @@ export const Home: React.FC = () => {
         {banner.isLoading ? (
           <Skaleton.Banner />
         ) : (
-          <ul className="flex mt-2 ">
-            <div className="flex gap-x-6 lg:overflow-x-auto ros">
+          <ul className="flex mt-2 w-full">
+            <div className="flex gap-x-6 py-2 w-full lg:overflow-x-auto ros">
               {banner?.data?.data?.map((el: any, idx: any) => (
                 <li
                   key={idx}
-                  className="transition duration-500 hover:scale-105 "
+                  className="transition duration-500 hover:scale-105 min-w-[205.239px]"
                 >
-                  <img src={el.banner_image} alt={el.banner_name} />
+                  <img src={el.banner_image} alt={el.banner_name}/>
                 </li>
               ))}
             </div>
