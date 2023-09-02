@@ -35,7 +35,7 @@ export const Saldo: React.FC = () => {
             disabled
             className="bg-transparent lg:w-full"
             value={
-              balance?.isFulfilled && numberFormat(balance.data?.data?.balance)
+              balance?.isFulfilled ? numberFormat(balance.data?.data?.balance) : ""
             }
           />
         </div>
