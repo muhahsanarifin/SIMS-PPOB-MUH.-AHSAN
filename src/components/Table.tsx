@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../redux/store";
 import { transactionAction } from "../redux/reducers/transaction";
@@ -12,17 +13,25 @@ export const Transaction: React.FC = () => {
   const transactionHitory = useSelector(
     (state: RootState) => state.transaction.getTransactionHistory
   );
-  const [offset, setOffset] = useState(0);
-  const [limit] = useState(5);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [offset, setOffset] = useState<any>(searchParams.get("offset") || 0);
+  const [limit] = useState<any>(searchParams.get("limit") || 5);
+
+  useEffect(() => {
+    setSearchParams({
+      offset: offset,
+      limit: limit,
+    });
+  }, [setSearchParams, offset, limit]);
 
   //Get transaction history
   useEffect(() => {
     const accessToken = login.data?.data.token;
-    const queryParams = `offset=${offset}&limit=${limit}`;
+    const queryParams = searchParams;
     dispatch(
       transactionAction.getTransactionHistoryThunk({ accessToken, queryParams })
     );
-  }, [dispatch, login.data?.data.token, limit, offset]);
+  }, [dispatch, login.data?.data.token, searchParams]);
 
   // Handle show more
   const handleShowMore = () => {
