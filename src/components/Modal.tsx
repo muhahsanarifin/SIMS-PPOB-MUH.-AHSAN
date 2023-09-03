@@ -82,7 +82,7 @@ export const PeMo: React.FC = () => {
               className="text-[#f13b2f] text-xs font-bold"
               onClick={handleAggreePayment}
             >
-              ya lanjutkan Top Up
+              Ya, lanjutkan Bayar
             </button>
           )}
 
@@ -153,7 +153,7 @@ export const ToMo: React.FC<{ [key: string]: any }> = ({
               className="text-[#f13b2f] text-xs font-bold"
               onClick={setAggree}
             >
-              ya lanjutkan Top Up
+              Ya, lanjutkan Top Up
             </button>
           )}
 

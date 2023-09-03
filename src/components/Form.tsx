@@ -74,6 +74,7 @@ export const Login: React.FC = () => {
                   />
                 </span>
                 <input
+                  id="email"
                   name="email"
                   type="email"
                   className={`w-full rounded-lg border-solid border-2 py-4 ps-12 pe-12 text-sm shadow-sm focus:outline-none focus:border-gray-500 ${
@@ -104,6 +105,7 @@ export const Login: React.FC = () => {
                   />
                 </span>
                 <input
+                  id="password"
                   name="password"
                   type={visiblePwd ? "text" : "password"}
                   className={`w-full rounded-lg border-solid border-2 py-4 ps-12 pe-12 text-sm shadow-sm focus:outline-none focus:border-gray-500 ${
@@ -242,6 +244,7 @@ export const Register: React.FC = () => {
                 />
               </span>
               <input
+                id="email"
                 name="email"
                 type="email"
                 className="w-full rounded-lg border-solid border-2 py-4 ps-12 pe-12 text-sm shadow-sm focus:outline-none border-gray-200 focus:border-gray-500"
@@ -270,6 +273,7 @@ export const Register: React.FC = () => {
                 />
               </span>
               <input
+                id="first_name"
                 name="first_name"
                 type="text"
                 className="w-full rounded-lg border-solid border-2 py-4 ps-12 pe-12 text-sm shadow-sm focus:outline-none border-gray-200 focus:border-gray-500"
@@ -298,6 +302,7 @@ export const Register: React.FC = () => {
                 />
               </span>
               <input
+                id="last_name"
                 name="last_name"
                 type="text"
                 className="w-full rounded-lg border-solid border-2 py-4 ps-12 pe-12 text-sm shadow-sm focus:outline-none border-gray-200 focus:border-gray-500"
@@ -326,6 +331,7 @@ export const Register: React.FC = () => {
                 />
               </span>
               <input
+                id="password"
                 name="password"
                 type={visiblePwd ? "text" : "password"}
                 className="w-full rounded-lg border-solid border-2 py-4 ps-12 pe-12 text-sm shadow-sm focus:outline-none border-gray-200 focus:border-gray-500"
@@ -371,6 +377,7 @@ export const Register: React.FC = () => {
                 />
               </span>
               <input
+                id="confirm_password"
                 name="confirm_password"
                 type={visibleKPwd ? "text" : "password"}
                 className={`w-full rounded-lg border-solid border-2 py-4 ps-12 pe-12 text-sm shadow-sm ${

@@ -9,21 +9,16 @@ import { ToMo, PeMo } from "./Modal";
 
 // Reguler Input Nominal = Rino
 export const Rino: React.FC<RinoProps> = ({
-  onLabel,
-  onName,
   onPlaceholder,
   setChange,
   onActive,
   onValue,
   onRead,
+  onDisabled,
 }) => {
   return (
     <>
       <div>
-        <label htmlFor="email" className="sr-only">
-          {onLabel}
-        </label>
-
         <div className="relative">
           <span className="absolute inset-y-0 grid place-content-center px-4">
             <Icon
@@ -32,13 +27,13 @@ export const Rino: React.FC<RinoProps> = ({
             />
           </span>
           <input
-            name={onName}
             type="number"
             className="w-full rounded-lg border-solid border-2 py-4 ps-12 pe-12 text-sm shadow-sm focus:outline-none focus:border-gray-500"
             placeholder={onPlaceholder}
             value={onValue}
             onChange={setChange}
             readOnly={onRead}
+            disabled={onDisabled}
           />
         </div>
       </div>
@@ -64,7 +59,6 @@ export const Payment: React.FC = () => {
   };
 
   // Note: Handle payment script to be continued inside Payment Modal (Modal.tsx).
-
   return (
     <>
       <div className="mb-4">
@@ -79,7 +73,11 @@ export const Payment: React.FC = () => {
         </div>
       </div>
       <div className="flex flex-col gap-y-4">
-        <Rino onValue={purchase?.data?.service_tariff} onRead={true} />
+        <Rino
+          onValue={purchase?.data?.service_tariff}
+          onRead={true}
+          onDisabled={true}
+        />
         <Button.PayTup
           onTitle={
             balance.data?.data?.balance < purchase?.data?.service_tariff

@@ -43,7 +43,7 @@ export const Saldo: React.FC = () => {
           />
         </div>
 
-        <label htmlFor="" className="text-xs flex gap-x-2 items-center">
+        <label className="text-xs flex gap-x-2 items-center">
           <span>lihat saldo</span>
           <button onClick={() => setVisibleSaldo(!visibleSaldo)}>
             <Icon
