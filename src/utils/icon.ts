@@ -46,4 +46,6 @@ export const saldo = {
     active: "#fafafa",
     disable: "#f7f8f9",
   },
+  widh: 14,
+  height: 14,
 };

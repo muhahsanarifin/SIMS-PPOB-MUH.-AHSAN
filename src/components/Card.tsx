@@ -26,14 +26,14 @@ export const Saldo: React.FC = () => {
 
   return (
     <>
-      <div className="w-1/2 bg-[#f13b2f] rounded-lg p-5 text-[#fafafa]">
+      <div className="w-1/2 bg-[#f13b2f] rounded-lg p-5 text-[#fafafa] flex flex-col justify-center">
         <p className="text-sm">Saldo anda</p>
-        <div className="flex gap-x-2">
-          <h1 className="text-2xl font-bold my-2">Rp </h1>
+        <div className="flex gap-x-2 my-2">
+          <h1 className="text-2xl font-bold">Rp </h1>
           <input
             type={visibleSaldo ? "text" : "password"}
             disabled
-            className="bg-transparent lg:w-full"
+            className="bg-transparent lg:w-full text-2xl"
             // Value tobe string empty when balance state has'nt been fullfilled.
             value={
               balance?.isFulfilled
@@ -43,9 +43,14 @@ export const Saldo: React.FC = () => {
           />
         </div>
 
-        <label className="text-xs flex gap-x-2 items-center">
-          <span>lihat saldo</span>
-          <button onClick={() => setVisibleSaldo(!visibleSaldo)}>
+        <label className="text-xs flex items-center">
+          <span className="min-w-[5rem]">
+            {visibleSaldo ? "Tutup saldo" : "Lihat saldo"}
+          </span>
+          <button
+            onClick={() => setVisibleSaldo(!visibleSaldo)}
+            className="flex items-center py-1"
+          >
             <Icon
               icon={
                 visibleSaldo
@@ -57,6 +62,8 @@ export const Saldo: React.FC = () => {
                   ? icon.saldo.color.active
                   : icon.saldo.color.disable
               }
+              width={icon.saldo.widh}
+              height={icon.saldo.height}
             />
           </button>
         </label>
