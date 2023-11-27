@@ -14,15 +14,17 @@ export const Transaction: React.FC = () => {
     (state: RootState) => state.transaction.getTransactionHistory
   );
   const [searchParams, setSearchParams] = useSearchParams();
-  const [offset, setOffset] = useState<any>(searchParams.get("offset") || 0);
-  const [limit] = useState<any>(searchParams.get("limit") || 5);
+  const [query, setQuery] = useState<any>({
+    offset: searchParams.get("offset") || 0,
+    limit: searchParams.get("limit") || 5,
+  });
 
   useEffect(() => {
     setSearchParams({
-      offset: offset,
-      limit: limit,
+      offset: query.offset,
+      limit: query.limit,
     });
-  }, [setSearchParams, offset, limit]);
+  }, [setSearchParams, query]);
 
   //Get transaction history
   useEffect(() => {
@@ -35,7 +37,7 @@ export const Transaction: React.FC = () => {
 
   // Handle show more
   const handleShowMore = () => {
-    setOffset(offset + 1);
+    setQuery({ ...query, offset: query.offset + 1, limit: query.limit + 5 });
   };
 
   return (
@@ -77,7 +79,8 @@ export const Transaction: React.FC = () => {
             ))}
           </ul>
         )}
-        {(transactionHitory?.data?.data?.records.length < 5 && offset === 0) ||
+        {(transactionHitory?.data?.data?.records.length < 5 &&
+          query.offset === 0) ||
         transactionHitory?.data?.data?.records.length === 0 ? null : (
           <button
             className="text-[#ef392d] font-bold mx-auto mt-2 transition duration-500 hover:scale-105"
