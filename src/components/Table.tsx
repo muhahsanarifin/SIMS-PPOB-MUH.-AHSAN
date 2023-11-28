@@ -13,10 +13,12 @@ export const Transaction: React.FC = () => {
   const transactionHitory = useSelector(
     (state: RootState) => state.transaction.getTransactionHistory
   );
+
   const [searchParams, setSearchParams] = useSearchParams();
+
   const [query, setQuery] = useState<any>({
-    offset: searchParams.get("offset") || 0,
-    limit: searchParams.get("limit") || 5,
+    offset: Number(searchParams.get("offset")) || 0,
+    limit: Number(searchParams.get("limit")) || 5,
   });
 
   useEffect(() => {
@@ -37,7 +39,7 @@ export const Transaction: React.FC = () => {
 
   // Handle show more
   const handleShowMore = () => {
-    setQuery({ ...query, offset: query.offset + 1, limit: query.limit + 5 });
+    setQuery({ ...query, offset: +query.offset + 1, limit: +query.limit + 5 });
   };
 
   return (
